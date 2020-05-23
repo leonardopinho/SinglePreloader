@@ -1,0 +1,3 @@
+# singlepreloader
+
+Simple preloader widget
