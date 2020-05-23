@@ -1,7 +1,15 @@
 library singlepreloader;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
+import 'package:flutter/material.dart';
+
+class SinglePreloader extends StatefulWidget {
+  @override
+  _SinglePreloaderState createState() => _SinglePreloaderState();
+}
+
+class _SinglePreloaderState extends State<SinglePreloader> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
 }
