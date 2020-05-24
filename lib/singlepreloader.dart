@@ -16,9 +16,9 @@ class SinglePreloader extends StatefulWidget {
       this.containerColor = Colors.grey,
       this.backgroundColor = Colors.black54})
       : assert(child != null);
-
+  
   static _SinglePreloaderState of(BuildContext context) {
-    final singlePreloaderState = context.ancestorStateOfType(TypeMatcher<_SinglePreloaderState>());
+    final singlePreloaderState = context.findAncestorStateOfType<_SinglePreloaderState>();
     return singlePreloaderState;
   }
 
