@@ -16,7 +16,7 @@ class SinglePreloader extends StatefulWidget {
       this.containerColor = Colors.grey,
       this.backgroundColor = Colors.black54})
       : assert(child != null);
-  
+
   static _SinglePreloaderState of(BuildContext context) {
     final singlePreloaderState = context.findAncestorStateOfType<_SinglePreloaderState>();
     return singlePreloaderState;
@@ -58,6 +58,7 @@ class _SinglePreloaderState extends State<SinglePreloader> with SingleTickerProv
 
   @override
   void dispose() {
+    _controller.dispose();
     super.dispose();
   }
 
@@ -69,34 +70,36 @@ class _SinglePreloaderState extends State<SinglePreloader> with SingleTickerProv
     return Stack(
       children: [
         widget.child,
-        FadeTransition(
-          opacity: _animation,
-          child: Stack(children: [
-            Container(
-              width: _width,
-              height: _height,
-              color: Colors.black38,
-            ),
-            Center(
-              child: Container(
-                width: 65.0,
-                height: 65.0,
-                padding: EdgeInsets.all(12.0),
-                decoration: BoxDecoration(
-                    color: widget.backgroundColor,
-                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                    border: Border.all(
-                      color: Colors.black54,
-                      width: 1,
-                    )),
-                child: CircularProgressIndicator(
-                  strokeWidth: 2.5,
-                  valueColor: AlwaysStoppedAnimation(widget.indicatorColor),
-                ),
-              ),
-            )
-          ]),
-        )
+        _visible
+            ? FadeTransition(
+                opacity: _animation,
+                child: Stack(children: [
+                  Container(
+                    width: _width,
+                    height: _height,
+                    color: Colors.black38,
+                  ),
+                  Center(
+                    child: Container(
+                      width: 65.0,
+                      height: 65.0,
+                      padding: EdgeInsets.all(12.0),
+                      decoration: BoxDecoration(
+                          color: widget.backgroundColor,
+                          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                          border: Border.all(
+                            color: Colors.black54,
+                            width: 1,
+                          )),
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2.5,
+                        valueColor: AlwaysStoppedAnimation(widget.indicatorColor),
+                      ),
+                    ),
+                  )
+                ]),
+              )
+            : Container()
       ],
     );
   }
