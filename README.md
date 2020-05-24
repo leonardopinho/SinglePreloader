@@ -1,3 +1,5 @@
+[![pub package](https://img.shields.io/pub/v/flutter_progress_hud.svg)](https://pub.dev/packages/singlepreloader)
+
 # singlepreloader
 
 Simple preloader widget
