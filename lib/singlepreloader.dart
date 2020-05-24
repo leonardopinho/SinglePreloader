@@ -9,8 +9,18 @@ class SinglePreloader extends StatefulWidget {
   final Color containerColor;
   final Color backgroundColor;
 
-  SinglePreloader({@required this.child, this.indicatorWidget, this.indicatorColor, this.containerColor, this.backgroundColor})
+  SinglePreloader(
+      {@required this.child,
+        this.indicatorWidget,
+        this.indicatorColor = Colors.white,
+        this.containerColor = Colors.grey,
+        this.backgroundColor = Colors.black54})
       : assert(child != null);
+
+  static _SinglePreloaderState of(BuildContext context) {
+    final singlePreloaderState = context.ancestorStateOfType(TypeMatcher<_SinglePreloaderState>());
+    return singlePreloaderState;
+  }
 
   @override
   _SinglePreloaderState createState() => _SinglePreloaderState();
@@ -19,6 +29,7 @@ class SinglePreloader extends StatefulWidget {
 class _SinglePreloaderState extends State<SinglePreloader> with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation _animation;
+  bool _visible = false;
 
   void show() {
     _controller.forward();
@@ -30,12 +41,15 @@ class _SinglePreloaderState extends State<SinglePreloader> with SingleTickerProv
 
   @override
   void initState() {
-    _controller = AnimationController(vsync: this, duration: Duration(milliseconds: 500),);
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 500),
+    );
     _animation = CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn);
 
     _animation.addStatusListener((status) {
       setState(() {
-        //_barrierVisible = status != AnimationStatus.dismissed;
+        _visible = status != AnimationStatus.dismissed;
       });
     });
 
@@ -49,14 +63,41 @@ class _SinglePreloaderState extends State<SinglePreloader> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [widget.child, FadeTransition(opacity: _animation, child: Stack(children: [
-      Container(
-        width: 40.0,
-        height: 40.0,
-        color: Colors.grey[400],
-        child: CircularProgressIndicator(strokeWidth: 3.0, valueColor: AlwaysStoppedAnimation(widget.indicatorColor),),),
-      Visibility(visible: true, child: ModalBarrier(color: widget.barrierColor,))
-    ],))
-    ]);
+    double _width = MediaQuery.of(context).size.width;
+    double _height = MediaQuery.of(context).size.height;
+
+    return Stack(
+      children: [
+        widget.child,
+        FadeTransition(
+          opacity: _animation,
+          child: Stack(children: [
+            Container(
+              width: _width,
+              height: _height,
+              color: Colors.black38,
+            ),
+            Center(
+              child: Container(
+                width: 65.0,
+                height: 65.0,
+                padding: EdgeInsets.all(12.0),
+                decoration: BoxDecoration(
+                    color: widget.backgroundColor,
+                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                    border: Border.all(
+                      color: Colors.black54,
+                      width: 1,
+                    )),
+                child: CircularProgressIndicator(
+                  strokeWidth: 2.5,
+                  valueColor: AlwaysStoppedAnimation(widget.indicatorColor),
+                ),
+              ),
+            )
+          ]),
+        )
+      ],
+    );
   }
 }
