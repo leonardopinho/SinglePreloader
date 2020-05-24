@@ -11,10 +11,10 @@ class SinglePreloader extends StatefulWidget {
 
   SinglePreloader(
       {@required this.child,
-        this.indicatorWidget,
-        this.indicatorColor = Colors.white,
-        this.containerColor = Colors.grey,
-        this.backgroundColor = Colors.black54})
+      this.indicatorWidget,
+      this.indicatorColor = Colors.white,
+      this.containerColor = Colors.grey,
+      this.backgroundColor = Colors.black54})
       : assert(child != null);
 
   static _SinglePreloaderState of(BuildContext context) {
