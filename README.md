@@ -1,3 +1,5 @@
+[![pub package](https://img.shields.io/pub/v/singlepreloader.svg)](https://pub.dev/packages/singlepreloader)
+
 # singlepreloader
 
 Simple preloader widget
