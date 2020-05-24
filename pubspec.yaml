@@ -1,6 +1,6 @@
 name: singlepreloader
 description: The widget to wait for the return of asynchronous calls with preload. The modal temporarily locks the screen.
-version: 0.0.5
+version: 0.0.1
 author: Leonardo Pinho <contato@leonardopinho.com>
 homepage: https://github.com/leonardopinho/SinglePreloader
 

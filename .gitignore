@@ -8,7 +8,7 @@
 .buildlog/
 .history
 .svn/
-
+.gen/
 # IntelliJ related
 *.iml
 *.ipr
@@ -73,3 +73,5 @@ build/
 !**/ios/**/default.pbxuser
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+/gen/
+/gen/

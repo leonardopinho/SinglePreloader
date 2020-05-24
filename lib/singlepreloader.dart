@@ -18,7 +18,8 @@ class SinglePreloader extends StatefulWidget {
       : assert(child != null);
 
   static _SinglePreloaderState of(BuildContext context) {
-    final singlePreloaderState = context.findAncestorStateOfType<_SinglePreloaderState>();
+    final singlePreloaderState =
+        context.findAncestorStateOfType<_SinglePreloaderState>();
     return singlePreloaderState;
   }
 
@@ -26,7 +27,8 @@ class SinglePreloader extends StatefulWidget {
   _SinglePreloaderState createState() => _SinglePreloaderState();
 }
 
-class _SinglePreloaderState extends State<SinglePreloader> with SingleTickerProviderStateMixin {
+class _SinglePreloaderState extends State<SinglePreloader>
+    with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation _animation;
   bool _visible = false;
@@ -45,7 +47,8 @@ class _SinglePreloaderState extends State<SinglePreloader> with SingleTickerProv
       vsync: this,
       duration: Duration(milliseconds: 500),
     );
-    _animation = CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn);
+    _animation =
+        CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn);
 
     _animation.addStatusListener((status) {
       setState(() {
@@ -93,7 +96,8 @@ class _SinglePreloaderState extends State<SinglePreloader> with SingleTickerProv
                           )),
                       child: CircularProgressIndicator(
                         strokeWidth: 2.5,
-                        valueColor: AlwaysStoppedAnimation(widget.indicatorColor),
+                        valueColor:
+                            AlwaysStoppedAnimation(widget.indicatorColor),
                       ),
                     ),
                   )
