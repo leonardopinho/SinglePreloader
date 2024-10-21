@@ -2,8 +2,6 @@
 
 # singlepreloader
 
-Simple preloader widget
-
 This widget is a simple and functional preloader, ideal for enhancing the experience in applications that make asynchronous calls. It offers customization options, allowing users to select between different types and themes, adapting to the application's style and providing a more pleasant and consistent experience.
 
 ### Screenshot
