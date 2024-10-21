@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:single_preloader/single_preloader.dart';
+import 'package:singlepreloader/single_preloader.dart';
 
 void main() {
   runApp(MyApp());

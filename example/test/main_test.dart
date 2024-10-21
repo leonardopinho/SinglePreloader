@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:single_preloader/single_preloader.dart';
+import 'package:singlepreloader/single_preloader.dart';
 
 void main() {
   testWidgets('Loader should appear and disappear on show() and hide()', (WidgetTester tester) async {
