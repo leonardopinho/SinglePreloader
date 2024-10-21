@@ -4,7 +4,7 @@
 
 ### Screenshot
 
-<img src="https://leonardopinho.com/singlepreloader/plugin_preloader_1.gif" height="500em" />
+<img src="https://leonardopinho.com/singlepreloader/plugin_preloader_2.gif" height="500em" />
 
 Simple preloader widget
 
