@@ -1,7 +1,7 @@
 name: single_preloader
 description: "The widget to wait for the return of asynchronous calls with preload."
-version: 0.0.1
-homepage:
+version: 0.2.0
+homepage: https://github.com/leonardopinho/single_preloader
 
 environment:
   sdk: ^3.5.3
