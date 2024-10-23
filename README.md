@@ -8,3 +8,17 @@ This widget is a simple and functional preloader, ideal for enhancing the experi
 
 <img src="https://leonardopinho.com/singlepreloader/plugin_preloader_2.gif" height="400em" />
 
+#### Customization
+Preloaders can be customized with the following parameters:
+
+```
+    SimplePreloader(
+       type = PreloaderType.DEFAULT,
+        indicatorColor: Colors.white,
+        containerColor: Colors.black54,
+        containerOpacity: .5,
+        backgroundColor:  Colors.black38,
+        backgroundOpacity: .5,
+    );
+```
+
