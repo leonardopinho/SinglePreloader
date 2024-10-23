@@ -1,4 +1,4 @@
-[![pub package](https://img.shields.io/pub/v/singlepreloader.svg)](https://pub.dev/packages/singlepreloader)
+[![pub package](https://img.shields.io/pub/v/simple_preloader.svg)](https://pub.dev/packages/simple_preloader)
 
 # Simple Preloader
 
@@ -6,7 +6,7 @@ This widget is a simple and functional preloader, ideal for enhancing the experi
 
 ### Screenshot
 
-<img src="https://leonardopinho.com/singlepreloader/plugin_preloader_2.gif" height="390em" />
+<img src="https://leonardopinho.com/singlepreloader/plugin_preloader_2.gif" height="400em" />
 
 #### Customization
 Preloaders can be customized with the following parameters:
