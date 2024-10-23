@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:singlepreloader/single_preloader.dart';
+import 'package:simple_preloader/simple_preloader.dart';
 
 void main() {
   testWidgets('Loader should appear and disappear on show() and hide()', (WidgetTester tester) async {
     await tester.pumpWidget(
       const MaterialApp(
-        home: SinglePreloader(
-          indicatorWidget: CircularProgressIndicator(),
+        home: SimplePreloader(
           child: Text('Test Child'),
         ),
       ),
     );
 
-    final preloaderState = SinglePreloader.of(tester.element(find.text('Test Child')));
+    final preloaderState = SimplePreloader.of(tester.element(find.text('Test Child')));
 
     expect(find.byType(CircularProgressIndicator), findsNothing);
 

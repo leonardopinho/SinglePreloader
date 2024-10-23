@@ -30,7 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  singlepreloader:
+  simple_preloader:
     path: ../
 
   # The following adds the Cupertino Icons font to your application.

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:singlepreloader/single_preloader.dart';
+import 'package:simple_preloader/simple_preloader.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,23 +29,76 @@ class MyHomePage extends StatefulWidget {
   MyHomePageState createState() => MyHomePageState();
 }
 
+class PreloaderContext {
+  final String name;
+  final PreloaderType type;
+
+  const PreloaderContext({required this.name, required this.type});
+}
+
 class MyHomePageState extends State<MyHomePage> {
-  late final _progress;
+  late PreloaderContext selectedItem;
+  List<PreloaderContext> lst = [
+    const PreloaderContext(name: 'Default', type: PreloaderType.DEFAULT),
+    const PreloaderContext(name: 'Animated balls', type: PreloaderType.ANIMATED_BALLS),
+    const PreloaderContext(name: 'Animated pulse', type: PreloaderType.ANIMATED_PULSE),
+    const PreloaderContext(name: 'Animated success', type: PreloaderType.ANIMATED_SUCCESS),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    selectedItem = lst[0];
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[400],
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: SinglePreloader(
+      body: SimplePreloader(
+        type: selectedItem.type,
         child: Builder(builder: (context) {
-          _progress = SinglePreloader.of(context);
+          var preloader = SimplePreloader.of(context)!;
 
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 50),
+                  child: DropdownMenu<PreloaderContext>(
+                    trailingIcon: const Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black,
+                    ),
+                    initialSelection: selectedItem,
+                    requestFocusOnTap: true,
+                    textStyle: const TextStyle(color: Colors.black),
+                    label: const Text('Curves', style: TextStyle(color: Colors.black)),
+                    onSelected: (PreloaderContext? newValue) {
+                      setState(() {
+                        selectedItem = newValue!;
+                      });
+                    },
+                    menuStyle: MenuStyle(backgroundColor: WidgetStateProperty.all(Colors.grey)),
+                    dropdownMenuEntries: lst.map<DropdownMenuEntry<PreloaderContext>>((PreloaderContext item) {
+                      return DropdownMenuEntry<PreloaderContext>(
+                        value: item,
+                        label: item.name,
+                        style: MenuItemButton.styleFrom(
+                          foregroundColor: Colors.white60,
+                          backgroundColor: Colors.black45,
+                        ),
+                      );
+                    }).toList(),
+                    inputDecorationTheme: const InputDecorationTheme(
+                      isDense: true,
+                    ),
+                  ),
+                ),
                 const Padding(
                   padding: EdgeInsets.only(bottom: 20),
                   child: Text(
@@ -54,13 +107,13 @@ class MyHomePageState extends State<MyHomePage> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    _progress.show();
-                    Future.delayed(const Duration(milliseconds: 3000), () {
-                      _progress.hide();
+                    preloader.show();
+                    Future.delayed(const Duration(milliseconds: 3500), () {
+                      preloader.hide();
                     });
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.grey[500],
+                    backgroundColor: Colors.white,
                   ),
                   child: const Text(
                     "Show",

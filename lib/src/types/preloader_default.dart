@@ -1,68 +1,60 @@
-library single_preloader;
-
+import 'package:custom_events/custom_events.dart';
 import 'package:flutter/material.dart';
+import 'package:simple_preloader/src/preloader_events.dart';
+import 'package:simple_preloader/src/preloader_mixin.dart';
+import 'package:simple_preloader/src/types/abstract_type.dart';
 
-class SinglePreloader extends StatefulWidget {
+class PreloaderDefault extends StatefulWidget implements AbstractCustomPreloader {
+  @override
   final Widget child;
-  final Widget indicatorWidget;
-  final Color indicatorColor;
-  final Color containerColor;
-  final Color backgroundColor;
-
-  const SinglePreloader({
-    required this.child,
-    this.indicatorWidget = const CircularProgressIndicator(),
-    this.indicatorColor = Colors.white,
-    this.containerColor = Colors.grey,
-    this.backgroundColor = Colors.black54,
-    super.key,
-  });
-
-  static _SinglePreloaderState? of(BuildContext context) {
-    return context.findAncestorStateOfType<_SinglePreloaderState>();
-  }
 
   @override
-  _SinglePreloaderState createState() => _SinglePreloaderState();
+  final Color indicatorColor;
+
+  @override
+  final Color containerColor;
+
+  @override
+  final double containerOpacity;
+
+  @override
+  final Color backgroundColor;
+
+  @override
+  final double backgroundOpacity;
+
+  const PreloaderDefault({
+    super.key,
+    required this.child,
+    required this.indicatorColor,
+    required this.containerColor,
+    required this.containerOpacity,
+    required this.backgroundColor,
+    required this.backgroundOpacity,
+  });
+
+  @override
+  PreloaderDefaultState createState() => PreloaderDefaultState();
 }
 
-class _SinglePreloaderState extends State<SinglePreloader> with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-  late final Animation<double> _animation;
+class PreloaderDefaultState extends State<PreloaderDefault> with SingleTickerProviderStateMixin, PreloaderMixin {
   bool _visible = false;
-
-  void show() {
-    _controller.forward();
-  }
-
-  void hide() {
-    _controller.reverse();
-  }
 
   @override
   void initState() {
     super.initState();
+    initEvents(this, changeStatus);
+  }
 
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 500),
-    );
-
-    _animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.fastOutSlowIn,
-    );
-
-    _animation.addStatusListener((status) {
-      setState(() {
-        _visible = status != AnimationStatus.dismissed;
-      });
+  void changeStatus(status) {
+    setState(() {
+      _visible = status != AnimationStatus.dismissed;
     });
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    disposeEvents();
     super.dispose();
   }
 
@@ -76,13 +68,13 @@ class _SinglePreloaderState extends State<SinglePreloader> with SingleTickerProv
         widget.child,
         if (_visible)
           FadeTransition(
-            opacity: _animation,
+            opacity: animation,
             child: Stack(
               children: [
                 Container(
                   width: width,
                   height: height,
-                  color: Colors.black38,
+                  color: widget.backgroundColor.withOpacity(widget.backgroundOpacity),
                 ),
                 Center(
                   child: Container(
@@ -90,15 +82,16 @@ class _SinglePreloaderState extends State<SinglePreloader> with SingleTickerProv
                     height: 65.0,
                     padding: const EdgeInsets.all(12.0),
                     decoration: BoxDecoration(
-                      color: widget.backgroundColor,
+                      color: widget.containerColor.withOpacity(widget.containerOpacity),
                       borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                       border: Border.all(
-                        color: Colors.black54,
+                        color: widget.containerColor.withOpacity(widget.containerOpacity),
                         width: 1,
                       ),
                     ),
                     child: CircularProgressIndicator(
-                      strokeWidth: 2.5,
+                      strokeWidth: 2.9,
+                      color: widget.indicatorColor,
                       valueColor: AlwaysStoppedAnimation<Color>(widget.indicatorColor),
                     ),
                   ),
