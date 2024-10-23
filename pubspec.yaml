@@ -1,6 +1,6 @@
 name: simple_preloader
 description: "The widget to wait for the return of asynchronous calls with preload."
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/leonardopinho/simple_preloader
 
 environment:
