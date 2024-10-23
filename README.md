@@ -6,7 +6,7 @@ This widget is a simple and functional preloader, ideal for enhancing the experi
 
 ### Screenshot
 
-<img src="https://leonardopinho.com/singlepreloader/plugin_preloader_2.gif" height="400em" />
+<img src="https://leonardopinho.com/singlepreloader/plugin_preloader_2.gif" height="390em" />
 
 #### Customization
 Preloaders can be customized with the following parameters:
