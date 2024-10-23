@@ -12,6 +12,8 @@ This widget is a simple and functional preloader, ideal for enhancing the experi
 Preloaders can be customized with the following parameters:
 
 ```
+    // default values
+    
     SimplePreloader(
        type = PreloaderType.DEFAULT,
         indicatorColor: Colors.white,
