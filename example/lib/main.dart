@@ -77,7 +77,7 @@ class MyHomePageState extends State<MyHomePage> {
                     initialSelection: selectedItem,
                     requestFocusOnTap: true,
                     textStyle: const TextStyle(color: Colors.black),
-                    label: const Text('Curves', style: TextStyle(color: Colors.black)),
+                    label: const Text('Types', style: TextStyle(color: Colors.black)),
                     onSelected: (PreloaderContext? newValue) {
                       setState(() {
                         selectedItem = newValue!;
